@@ -6,9 +6,9 @@ const rateLimit = require('express-rate-limit');
 const router = express.Router();
 
 const moveLimit = rateLimit({
-  windowMs: 5000,
+  windowMs: 10000,
   max: 1,
-  message: { error: 'Too many requests, wait 5 seconds' }
+  message: { error: 'Too many requests, wait 10 seconds' }
 });
 
 const FACTION_COLORS = {
@@ -110,7 +110,7 @@ router.post('/move', moveLimit, async (req, res) => {
         message += ' +10% team bonus!';
       }
 
-      const distanceGain = activityMode === 'CAVALRY' ? 0.2 : 0.1;
+      const distanceGain = activityMode === 'CAVALRY' ? 0.02 : 0.01;
       userEnergy = Math.min(userEnergy + 5, 100);
 
       await connection.query(
@@ -198,28 +198,52 @@ router.get('/map/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const [visited] = await pool.query(
-      'SELECT h3_index FROM visited_hexes WHERE user_id = ?',
-      [userId]
+    const [allHexes] = await pool.query(
+      'SELECT h.h3_index, h.faction, h.defense_level, h.owner_id, u.username as owner_name FROM hexagons h LEFT JOIN users u ON h.owner_id = u.id'
     );
 
-    const [hexes] = await pool.query(
-      'SELECT h3_index, faction, defense_level FROM hexagons WHERE h3_index IN (?)',
-      [visited.map(v => v.h3_index)]
-    );
+    console.log('All hexes with owners:', allHexes);
 
     res.json({
-      visitedHexes: visited.map(v => v.h3_index),
-      hexData: hexes.map(h => ({
+      hexData: allHexes.map(h => ({
         h3Index: h.h3_index,
         faction: h.faction,
         color: FACTION_COLORS[h.faction],
-        defenseLevel: h.defense_level
+        defenseLevel: h.defense_level,
+        ownerName: h.owner_name || 'Unknown',
+        ownerId: h.owner_id
       }))
     });
 
   } catch (error) {
     console.error('Map error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.get('/config', (req, res) => {
+  res.json({
+    mapboxToken: process.env.MAPBOX_TOKEN || 'your_mapbox_token_here'
+  });
+});
+
+router.get('/reset/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    await pool.query('DELETE FROM hexagons');
+    await pool.query('DELETE FROM visited_hexes');
+    await pool.query('UPDATE users SET total_distance = 0, exp_points = 0');
+    
+    const [users] = await pool.query('SELECT id, username, email FROM users');
+    
+    res.json({ 
+      success: true, 
+      message: 'All game data reset successfully',
+      users: users
+    });
+  } catch (error) {
+    console.error('Reset error:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });

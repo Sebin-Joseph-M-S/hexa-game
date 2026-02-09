@@ -42,7 +42,10 @@ function startTracking(onPositionUpdate) {
     },
     (error) => {
       console.error('GPS error:', error);
-      document.getElementById('trackingStatus').textContent = 'GPS Error';
+      const statusEl = document.getElementById('locationText');
+      if (statusEl) {
+        statusEl.textContent = 'GPS Error: ' + error.message;
+      }
     },
     {
       enableHighAccuracy: true,
