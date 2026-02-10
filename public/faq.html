@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FAQ - Hexa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                primary: "#6366f1",
+                "accent-orange": "#fb923c",
+                "accent-purple": "#a855f7",
+            },
+            fontFamily: {
+                display: ["Plus Jakarta Sans", "sans-serif"],
+            },
+        },
+    },
+};
+</script>
+<script>
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-display">
+<header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+<a href="/landing.html" class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-icons">pentagon</span>
+</div>
+<span class="text-xl sm:text-2xl font-extrabold">Hexa</span>
+</a>
+<div class="flex items-center gap-3 sm:gap-6">
+<a class="text-xs sm:text-sm font-semibold hover:text-primary transition-colors" href="/landing.html">Home</a>
+<a class="text-xs sm:text-sm font-semibold hover:text-primary transition-colors" href="/about.html">About</a>
+<a class="text-xs sm:text-sm font-semibold hover:text-primary transition-colors" href="/rules.html">Rules</a>
+<a class="bg-primary text-white px-4 sm:px-6 py-2 rounded-full font-bold text-xs sm:text-sm hover:scale-105 transition-transform" href="/login.html">Play</a>
+</div>
+</nav>
+</header>
+
+<section class="py-20 px-6">
+<div class="max-w-4xl mx-auto">
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 text-center">Frequently Asked Questions</h1>
+<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 text-center mb-16 max-w-2xl mx-auto">Everything you need to know about Hexa</p>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-primary">help</span>
+<h2 class="text-2xl sm:text-3xl font-bold">Getting Started</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How do I start playing?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Sign up with a username and password, choose your faction and class, then start walking! The game will automatically detect your location and allow you to capture hexagons.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Do I need to download an app?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">No! Hexa is a web-based game. Simply open it in your mobile browser and start playing. For the best experience, add it to your home screen.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">What devices are supported?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Any device with a modern browser and GPS capability. Works best on smartphones with Chrome, Safari, or Firefox.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-accent-orange">gps_fixed</span>
+<h2 class="text-2xl sm:text-3xl font-bold">GPS & Location</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How accurate is the GPS tracking?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">GPS accuracy typically ranges from 5-50 meters depending on your device, weather, and surroundings. Urban areas with tall buildings may have reduced accuracy.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Does GPS work indoors?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">GPS signal is weaker indoors. For best results, play outdoors with a clear view of the sky.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Can I play while driving?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">The game detects speeds above 30 km/h and switches to passive mode. You won't be able to capture hexes while driving for safety reasons.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Why does my location keep jumping?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">This is normal GPS behavior. Make sure location services are enabled, you're outdoors, and your device has a clear view of the sky.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-green-500">battery_charging_full</span>
+<h2 class="text-2xl sm:text-3xl font-bold">Battery & Performance</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Does Hexa drain my battery?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Yes, continuous GPS tracking uses battery. We recommend playing with a power bank for long sessions. The Wake Lock feature keeps your screen on, which also consumes power.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How can I save battery while playing?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Lower screen brightness, close other apps, and use battery saver mode on your device. Consider bringing a portable charger for longer walks.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Can I play in the background?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">No, web browsers stop GPS tracking when the app is in the background. Keep Hexa open and your screen on to continue playing.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-accent-purple">gamepad</span>
+<h2 class="text-2xl sm:text-3xl font-bold">Gameplay</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How big is each hexagon?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Each hex is approximately 0.1 km² (174m edge length). You need to walk about 174 meters to enter a new hex.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">What happens if I run out of energy?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">You can't capture enemy hexes without energy. Walk through neutral or your own hexes to regenerate energy (+5 per hex). Visit your home base for free energy.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Can I change my faction or class?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Faction choice is permanent. Class changes may be available in future updates.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How do I defend my territory?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Revisit your hexes to increase defense level (max 5 stars). Higher defense makes it more expensive for enemies to capture.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-yellow-500">security</span>
+<h2 class="text-2xl sm:text-3xl font-bold">Account & Privacy</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Is my location data safe?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Yes. We only store hex captures, not your exact GPS coordinates. See our <a href="/privacy.html" class="text-primary hover:underline">Privacy Policy</a> for details.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">Can other players see my exact location?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">No. Players only see which hexagons you've captured, not your real-time location.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">How do I delete my account?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Contact support at asn18123@gmail.com to request account deletion. All your data will be permanently removed.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 mb-8 border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-300">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-icons text-4xl text-red-500">bug_report</span>
+<h2 class="text-2xl sm:text-3xl font-bold">Troubleshooting</h2>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">The map isn't loading</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Check your internet connection. Refresh the page. Clear browser cache and try again.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">GPS location is not updating</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Enable location permissions in your browser settings. Make sure you're outdoors. Restart the app.</p>
+</div>
+<div>
+<h3 class="font-bold text-base sm:text-lg mb-2">I found a bug, how do I report it?</h3>
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">Email us at asn18123@gmail.com with details about the issue, your device, and browser version.</p>
+</div>
+</div>
+</div>
+
+<div class="mt-12 text-center">
+<p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-6">Still have questions?</p>
+<a href="mailto:asn18123@gmail.com" class="inline-flex bg-primary text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-xl hover:scale-105 hover:shadow-2xl transition-all items-center gap-3">
+Contact Support
+<span class="material-icons">email</span>
+</a>
+</div>
+</div>
+</section>
+
+<footer class="bg-white dark:bg-slate-800 py-12 px-6 border-t border-slate-200 dark:border-slate-700">
+<div class="max-w-7xl mx-auto text-center">
+<p class="text-slate-500 dark:text-slate-400 mb-6">© 2026 Hexa Gaming Systems. All rights reserved.</p>
+<div class="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
+<a href="/about.html" class="hover:text-primary transition-colors">About</a>
+<a href="/rules.html" class="hover:text-primary transition-colors">Rules</a>
+<a href="/faq.html" class="hover:text-primary transition-colors">FAQ</a>
+<a href="/privacy.html" class="hover:text-primary transition-colors">Privacy</a>
+<a href="/terms.html" class="hover:text-primary transition-colors">Terms</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

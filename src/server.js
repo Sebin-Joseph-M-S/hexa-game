@@ -66,7 +66,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/dashboard.html'));
+  res.sendFile(path.join(__dirname, '../public/landing.html'));
 });
 
 app.get('/map', (req, res) => {
@@ -91,6 +91,14 @@ app.get('/settings', (req, res) => {
 
 app.get('/squad', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/squad.html'));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/about.html'));
+});
+
+app.get('/rules', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/rules.html'));
 });
 
 server.listen(PORT, () => {
