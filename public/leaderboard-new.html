@@ -38,16 +38,16 @@ tailwind.config = {
 </head>
 <body class="font-sans min-h-screen overflow-x-hidden antialiased">
 <nav class="sticky top-0 z-50 px-8 py-6 flex items-center justify-between bg-black/80 backdrop-blur-md">
-<a href="/" class="flex items-center gap-3">
+<a href="/dashboard.html" class="flex items-center gap-3">
 <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined text-black font-bold">grid_view</span>
 </div>
 <span class="text-3xl font-display font-bold tracking-tighter">HEXA</span>
 </a>
 <div class="hidden md:flex items-center gap-12 text-sm font-bold uppercase tracking-widest">
-<a class="hover:text-accent-teal transition-colors" href="/map">Map</a>
-<a class="text-white border-b-2 border-white pb-1" href="/leaderboard">Leaderboard</a>
-<a class="hover:text-accent-teal transition-colors" href="/items">Shop</a>
+<a class="hover:text-accent-teal transition-colors" href="/map-new.html">Map</a>
+<a class="text-white border-b-2 border-white pb-1" href="/leaderboard-new.html">Leaderboard</a>
+<a class="hover:text-accent-teal transition-colors" href="/items.html">Shop</a>
 </div>
 <div class="flex items-center gap-4">
 <div class="text-right">
@@ -111,7 +111,7 @@ Expand Leaderboard
 </div>
 </div>
 </div>
-<a href="/map" class="bg-black text-white px-8 py-4 rounded-full font-bold text-xs tracking-widest uppercase hover:scale-105 active:scale-95 transition-all">
+<a href="/map-new.html" class="bg-black text-white px-8 py-4 rounded-full font-bold text-xs tracking-widest uppercase hover:scale-105 active:scale-95 transition-all">
 CONQUER
 </a>
 </div>
@@ -121,19 +121,33 @@ CONQUER
 <div class="fixed bottom-1/4 -left-64 w-[600px] h-[600px] bg-accent-orange/5 blur-[160px] rounded-full -z-10"></div>
 
 <script>
-const userId = localStorage.getItem('userId') || 1;
+const userId = localStorage.getItem('userId');
+if (!userId) {
+  window.location.href = '/login.html';
+}
 
 async function loadLeaderboard(type) {
   try {
-    const url = type === 'global' ? '/api/leaderboard/global' : '/api/leaderboard/local/default';
+    const url = type === 'global' ? '/leaderboard/global' : '/leaderboard/local/default';
     const response = await fetch(url);
     const data = await response.json();
     
     const leaders = data.leaderboard;
     
+    if (!leaders || leaders.length === 0) {
+      document.getElementById('topThree').innerHTML = '<p class="text-zinc-500 col-span-3 text-center">No players yet. Be the first!</p>';
+      return;
+    }
+    
     // Calculate total hexes
-    const total = leaders.reduce((sum, l) => sum + l.hexes, 0);
+    const total = leaders.reduce((sum, l) => sum + (parseInt(l.hexes) || 0), 0);
     document.getElementById('totalHexes').textContent = total.toLocaleString();
+    
+    // Format hex count
+    const formatHexes = (count) => {
+      if (count >= 1000) return `${(count / 1000).toFixed(1)}k`;
+      return count.toString();
+    };
     
     // Top 3
     const topThree = leaders.slice(0, 3);
@@ -149,7 +163,7 @@ async function loadLeaderboard(type) {
         <span class="text-accent-teal text-sm font-bold tracking-widest uppercase mb-8">Silver Tier</span>
         <div class="grid grid-cols-2 w-full gap-4 text-center">
           <div class="bg-black/40 rounded-3xl py-4">
-            <div class="text-2xl font-display font-bold">${(topThree[1].hexes / 1000).toFixed(1)}k</div>
+            <div class="text-2xl font-display font-bold">${formatHexes(topThree[1].hexes)}</div>
             <div class="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">Hexes</div>
           </div>
           <div class="bg-black/40 rounded-3xl py-4">
@@ -170,7 +184,7 @@ async function loadLeaderboard(type) {
         <span class="text-zinc-500 text-sm font-bold tracking-widest uppercase mb-10">Reigning Emperor</span>
         <div class="grid grid-cols-2 w-full gap-4 text-center">
           <div class="bg-zinc-100 rounded-3xl py-6">
-            <div class="text-3xl font-display font-bold text-black">${(topThree[0].hexes / 1000).toFixed(1)}k</div>
+            <div class="text-3xl font-display font-bold text-black">${formatHexes(topThree[0].hexes)}</div>
             <div class="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">Hexes</div>
           </div>
           <div class="bg-zinc-100 rounded-3xl py-6">
@@ -191,7 +205,7 @@ async function loadLeaderboard(type) {
         <span class="text-accent-blue text-sm font-bold tracking-widest uppercase mb-8">Bronze Tier</span>
         <div class="grid grid-cols-2 w-full gap-4 text-center">
           <div class="bg-black/40 rounded-3xl py-4">
-            <div class="text-2xl font-display font-bold">${(topThree[2].hexes / 1000).toFixed(1)}k</div>
+            <div class="text-2xl font-display font-bold">${formatHexes(topThree[2].hexes)}</div>
             <div class="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">Hexes</div>
           </div>
           <div class="bg-black/40 rounded-3xl py-4">

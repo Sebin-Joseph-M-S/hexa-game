@@ -10,12 +10,11 @@ router.get('/leaderboard/global', async (req, res) => {
         u.username, 
         u.faction, 
         u.exp_points,
-        COUNT(h.h3_index) as hexes,
-        u.total_distance
+        u.hexes_captured as hexes,
+        u.distance_traveled
       FROM users u
-      LEFT JOIN hexagons h ON h.owner_id = u.id
-      GROUP BY u.id
-      ORDER BY hexes DESC, u.exp_points DESC
+      WHERE u.hexes_captured > 0
+      ORDER BY u.hexes_captured DESC, u.exp_points DESC
       LIMIT 50
     `);
     
@@ -34,12 +33,11 @@ router.get('/leaderboard/local/:region', async (req, res) => {
         u.username, 
         u.faction, 
         u.exp_points,
-        COUNT(h.h3_index) as hexes,
-        u.total_distance
+        u.hexes_captured as hexes,
+        u.distance_traveled
       FROM users u
-      LEFT JOIN hexagons h ON h.owner_id = u.id
-      GROUP BY u.id
-      ORDER BY hexes DESC, u.exp_points DESC
+      WHERE u.hexes_captured > 0
+      ORDER BY u.hexes_captured DESC, u.exp_points DESC
       LIMIT 50
     `);
     

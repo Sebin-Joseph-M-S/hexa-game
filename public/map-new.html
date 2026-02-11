@@ -204,6 +204,7 @@ let runPath = null;
 let runStartTime = null;
 let runDistance = 0;
 let durationInterval = null;
+let playerTrail = null;
 
 const FACTION_COLORS = {
   NEON_SYNDICATE: '#4ADEBD',
@@ -257,6 +258,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 currentHexLayer = L.layerGroup().addTo(map);
 visitedHexesLayer = L.layerGroup().addTo(map);
 runPath = L.polyline([], { color: '#4ADEBD', weight: 4, opacity: 0.8 }).addTo(map);
+playerTrail = L.polyline([], { color: '#4ADEBD', weight: 3, opacity: 0.6, dashArray: '5, 10' }).addTo(map);
 
 loadVisitedHexes();
 loadUserData();
@@ -460,6 +462,7 @@ function updateHexagon(lat, lng) {
 }
 
 async function captureHex(lat, lng, h3Index, speed) {
+  // Track run distance if run is active
   if (runActive && runId) {
     if (lastPosition) {
       const R = 6371;
@@ -477,6 +480,7 @@ async function captureHex(lat, lng, h3Index, speed) {
     runPath.addLatLng([lat, lng]);
   }
   
+  // Always capture hexes regardless of run status
   try {
     const response = await fetch('/api/move', {
       method: 'POST',
@@ -524,6 +528,8 @@ startTracking((position) => {
   if (!lastPosition) {
     map.setView([position.lat, position.lng], 18);
   }
+  
+  playerTrail.addLatLng([position.lat, position.lng]);
   
   if (playerMarker) {
     playerMarker.setLatLng([position.lat, position.lng]);
