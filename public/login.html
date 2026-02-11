@@ -109,7 +109,7 @@ async function handleLogin(e) {
     if (data.success) {
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('username', data.username);
-      window.location.href = '/';
+      window.location.href = '/map';
     } else {
       showError(data.error || 'Login failed');
     }
@@ -137,7 +137,7 @@ async function handleSignup(e) {
     if (data.success) {
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('username', data.username);
-      window.location.href = '/';
+      window.location.href = '/map';
     } else {
       showError(data.error || 'Signup failed');
     }

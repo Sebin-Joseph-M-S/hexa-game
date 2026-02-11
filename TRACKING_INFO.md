@@ -16,11 +16,12 @@
 2. **CAVALRY** (Cycling/Driving)
    - Distance gain: 0.02 km per hex
    - Faster territory capture
-   - Speed limit: 30 km/h (passive mode above this)
+   - Speed limit: 8.3 m/s (30 km/h, passive mode above this)
 
 ### Speed Detection
-- Calculates speed between GPS points
-- If speed > 30 km/h → Passive mode (no territory capture)
+- Calculates speed between GPS points using Haversine formula
+- Displays speed in m/s for accuracy (walking speed: 1-2 m/s, running: 3-4 m/s)
+- If speed > 8.3 m/s → Passive mode (no territory capture)
 - Prevents cheating via cars/trains
 
 ### Run Tracking System
@@ -54,7 +55,7 @@
 
 ✅ **YES** - The system tracks:
 - Walking/Running accurately via GPS
-- Cycling (up to 30 km/h)
+- Cycling (up to 30 km/h / 8.3 m/s)
 - Real-time distance calculation
 - Hex capture based on physical location
 - Speed validation to prevent cheating
@@ -64,7 +65,7 @@
 - Requires screen to stay on (Wake Lock API)
 - Battery intensive
 - Needs HTTPS for GPS access
-- Speed > 30 km/h = passive mode (no capture)
+- Speed > 8.3 m/s (30 km/h) = passive mode (no capture)
 
 ## API Endpoints
 

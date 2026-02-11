@@ -31,6 +31,11 @@ tailwind.config = {
     },
   },
 };
+
+// Auth check - only logged-in users can access map
+if (!localStorage.getItem('userId')) {
+  window.location.href = '/landing.html';
+}
 </script>
 <style type="text/tailwindcss">
 :root {
@@ -119,7 +124,7 @@ tailwind.config = {
 </div>
 <div class="flex items-baseline gap-1">
 <span class="text-2xl sm:text-4xl font-display font-black" id="speedValue">0</span>
-<span class="text-xs sm:text-sm font-bold opacity-60">km/h</span>
+<span class="text-xs sm:text-sm font-bold opacity-60">m/s</span>
 </div>
 </div>
 </div>
@@ -415,7 +420,7 @@ async function loadVisitedHexes() {
 }
 
 function calculateSpeed(lat1, lng1, lat2, lng2, timeMs) {
-  const R = 6371e3;
+  const R = 6371e3; // Earth radius in meters
   const φ1 = lat1 * Math.PI / 180;
   const φ2 = lat2 * Math.PI / 180;
   const Δφ = (lat2 - lat1) * Math.PI / 180;
@@ -425,9 +430,10 @@ function calculateSpeed(lat1, lng1, lat2, lng2, timeMs) {
     Math.cos(φ1) * Math.cos(φ2) *
     Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c;
+  const distance = R * c; // distance in meters
 
-  return (distance / 1000) / (timeMs / 3600000);
+  // Return speed in meters per second
+  return distance / (timeMs / 1000);
 }
 
 function updateHexagon(lat, lng) {

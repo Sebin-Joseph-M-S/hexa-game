@@ -29,7 +29,7 @@ router.post('/move', moveLimit, async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    if (speed > 30) {
+    if (speed > 8.3) {
       return res.json({ success: false, message: 'Passive mode: Speed too high', passiveMode: true });
     }
 
