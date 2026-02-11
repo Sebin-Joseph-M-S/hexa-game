@@ -72,6 +72,15 @@ function goToPlayOrLogin() {
     window.location.href = '/login.html';
   }
 }
+
+// Dashboard button - only works if logged in
+function goToDashboardIfLoggedIn() {
+  if (localStorage.getItem('userId')) {
+    window.location.href = '/dashboard.html';
+  } else {
+    alert('Please login first to access dashboard');
+  }
+}
 </script>
 <header class="fixed top-4 left-0 right-0 z-50 px-4 md:px-6">
 <nav class="max-w-7xl mx-auto bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-[2.5rem] px-4 md:px-8 py-3 flex items-center justify-between">
@@ -88,9 +97,7 @@ function goToPlayOrLogin() {
 <span class="material-icons text-base dark:hidden">dark_mode</span>
 <span class="material-icons text-base hidden dark:block">light_mode</span>
 </button>
-<button class="bg-primary text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-bold shadow-lg shadow-primary/30 hover:scale-105 transition-transform flex items-center gap-2 text-xs sm:text-sm md:text-base" onclick="goToPlayOrLogin()">
-Play <span class="material-icons text-sm hidden sm:inline">north_east</span>
-</button>
+<button class="bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2 text-xs sm:text-sm md:text-base" onclick="goToDashboardIfLoggedIn()">Dashboard</button>
 </div>
 </nav>
 </header>
